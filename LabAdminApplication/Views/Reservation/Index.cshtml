@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<LabAdminApplication.Models.Reservation>
+
+<h2>Reservations</h2>
+<div class="row">
+    <a class="btn btn-outline-success" asp-controller="Reservation" asp-action="ExportAllReservations"> Export Reservations</a>
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-md-1">#</th>
+            <th class="col">Customer Details</th>
+            <th class="col">Number of movies/tickets</th>
+            <th class="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var i=1;
+            foreach(var item in Model)
+            {
+               <tr>
+                    <td>
+                        @(i++)
+                    </td>
+                    <td>
+                        @item.ReservedBy.Username
+                    </td>
+                    <td>
+                        @item.Movies.Count()
+                    </td>                
+                    <td>
+                        <!--<a class="btn btn-danger" href="/Reservation/GetReservationDetails/@item.Id">Details</a>-->
+                        <a class="btn btn-info" href="/Reservation/SavePdf/@item.Id">Create invoice</a>
+
+                    </td> 
+               </tr> 
+            }
+        }
+    </tbody>
+</table>
+
